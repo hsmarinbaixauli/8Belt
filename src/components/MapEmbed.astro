@@ -1,0 +1,104 @@
+---
+import { SITE } from '../config/site';
+---
+
+<!-- Mapa embebido — iframe solo se inyecta tras aceptar cookies -->
+<div
+  id="map-container"
+  class="relative w-full rounded-2xl overflow-hidden bg-cream border border-sand"
+  style="aspect-ratio: 16/9; min-height: 280px;"
+  aria-label="Mapa de localización de Beta 8 Center"
+>
+  <!-- Placeholder visible hasta que se acepten cookies -->
+  <div
+    id="map-placeholder"
+    class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center"
+  >
+    <div class="w-14 h-14 rounded-full bg-sage/15 flex items-center justify-center">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3F5A45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    </div>
+    <div>
+      <p class="font-serif text-bark font-medium text-base mb-1">C/ Gandía 10, Valencia</p>
+      <p class="text-clay text-sm leading-relaxed max-w-xs">
+        El mapa se carga tras aceptar las cookies de terceros (Google Maps).
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-2">
+      <button
+        id="map-accept-cookies"
+        type="button"
+        class="btn-primary text-sm py-2 px-5"
+      >
+        Aceptar cookies y ver mapa
+      </button>
+      <a
+        href={SITE.mapsLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-secondary text-sm py-2 px-5"
+      >
+        Abrir en Google Maps
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Iframe — oculto hasta que el usuario acepte -->
+  <iframe
+    id="map-iframe"
+    title="Localización de Beta 8 Center en C/ Gandía 10, Valencia"
+    width="100%"
+    height="100%"
+    style="border:0; position:absolute; inset:0; display:none;"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
+<script>
+  const MAPS_SRC = 'https://maps.google.com/maps?q=Calle+Gandia+10+Valencia+Spain&t=&z=16&ie=UTF8&iwloc=&output=embed';
+
+  function loadMap() {
+    const placeholder = document.getElementById('map-placeholder');
+    const iframe = document.getElementById('map-iframe') as HTMLIFrameElement | null;
+    if (!iframe || !placeholder) return;
+    if (iframe.src !== MAPS_SRC) {
+      iframe.src = MAPS_SRC;
+    }
+    iframe.style.display = 'block';
+    placeholder.style.display = 'none';
+  }
+
+  // Si ya se aceptaron cookies, cargar inmediatamente
+  if (localStorage.getItem('beta8_cookies') === 'accepted') {
+    loadMap();
+  }
+
+  // Escuchar evento de consentimiento
+  window.addEventListener('cookieConsent', (e) => {
+    const ev = e as CustomEvent<{ accepted: boolean }>;
+    if (ev.detail.accepted) loadMap();
+  });
+
+  // Botón "Aceptar cookies y ver mapa"
+  document.getElementById('map-accept-cookies')?.addEventListener('click', () => {
+    localStorage.setItem('beta8_cookies', 'accepted');
+    loadMap();
+    // Ocultar banner de cookies si está visible
+    const banner = document.getElementById('cookie-banner');
+    if (banner && !banner.hasAttribute('hidden')) {
+      banner.setAttribute('hidden', '');
+      banner.setAttribute('aria-hidden', 'true');
+      document.body.style.setProperty('--cookie-h', '0px');
+    }
+    window.dispatchEvent(new CustomEvent('cookieConsent', { detail: { accepted: true } }));
+  });
+</script>

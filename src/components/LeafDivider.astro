@@ -1,0 +1,61 @@
+---
+// Ornamento de rama de olivo entre filetes — el separador de sección de la
+// referencia de estilo. Puramente decorativo: aria-hidden y sin texto.
+
+interface Props {
+  /** Ancho de los filetes laterales. `none` deja solo la rama. */
+  lines?: 'wide' | 'short' | 'none';
+  class?: string;
+}
+
+const { lines = 'wide', class: className = '' } = Astro.props;
+
+const lineWidth = {
+  wide: 'w-20 sm:w-32',
+  short: 'w-10 sm:w-14',
+  none: 'hidden',
+}[lines];
+
+// Hoja lenticular apuntando a +x, longitud 14
+const LEAF = 'M0 0C3.5-3.6 9-4.2 14 0 9 4.2 3.5 3.6 0 0Z';
+
+// Rama abierta hacia la izquierda. Las hojas se insertan en puntos
+// escalonados del tallo y alternan arriba/abajo: emparejarlas en el mismo
+// punto las convierte en un chevrón, no en una rama.
+// En SVG rotate() gira en sentido horario y la Y crece hacia abajo, así que
+// >180° apunta arriba-izquierda y <180° abajo-izquierda.
+const leaves = [
+  { x: 50, y: 12, rot: 208, scale: 0.78 },
+  { x: 44, y: 13, rot: 152, scale: 0.78 },
+  { x: 38, y: 12, rot: 205, scale: 0.9 },
+  { x: 32, y: 13, rot: 155, scale: 0.9 },
+  { x: 26, y: 12, rot: 202, scale: 0.82 },
+  { x: 20, y: 13, rot: 158, scale: 0.82 },
+];
+---
+
+<div class={`flex items-center justify-center gap-4 text-sage ${className}`} aria-hidden="true">
+  <span class={`${lineWidth} h-px bg-sand`}></span>
+
+  <svg width="60" height="26" viewBox="0 0 60 26" fill="none" class="shrink-0 text-sage">
+    <!-- Tallo -->
+    <path
+      d="M57 13C46 13 34 12.6 17 11.6"
+      stroke="currentColor"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      opacity="0.85"
+    />
+    <!-- Hojas -->
+    {leaves.map(({ x, y, rot, scale }) => (
+      <path
+        d={LEAF}
+        fill="currentColor"
+        opacity="0.8"
+        transform={`translate(${x} ${y}) rotate(${rot}) scale(${scale})`}
+      />
+    ))}
+  </svg>
+
+  <span class={`${lineWidth} h-px bg-sand`}></span>
+</div>

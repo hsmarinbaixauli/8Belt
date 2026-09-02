@@ -1,0 +1,93 @@
+---
+import { SITE } from '../../config/site';
+---
+
+<section aria-labelledby="presentacion-heading" class="bg-surface">
+  <div class="container-b8 section-py">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Foto (izquierda en desktop) — alterna con el hero para crear ritmo visual -->
+      <div class="order-2 lg:order-1 flex justify-center">
+        <div class="relative w-full max-w-sm lg:max-w-none">
+          <!-- Sombra decorativa desplazada -->
+          <div class="absolute top-4 left-4 w-full h-full rounded-3xl bg-sand" aria-hidden="true"></div>
+          <!-- Placeholder foto 2 -->
+          <!-- [PENDIENTE: sustituir por img real con src="/fotos/santiago-navarro-2.jpg" alt="Santiago Navarro Zamora en consulta"] -->
+          <div
+            class="relative aspect-[4/5] w-full rounded-3xl bg-cream border border-sand flex flex-col items-center justify-center gap-4 p-8"
+            role="img"
+            aria-label="[PENDIENTE: Fotografía de Santiago Navarro Zamora]"
+          >
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#8C9C7C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+            <div class="text-center">
+              <span class="badge-pending mb-2">Imagen pendiente</span>
+              <p class="text-clay text-xs font-sans mt-1 leading-snug">Segunda fotografía de Santiago<br/>(consulta / entorno profesional)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto (derecha en desktop) -->
+      <div class="order-1 lg:order-2">
+        <!-- Etiqueta de sección -->
+        <p class="eyebrow mb-4" aria-hidden="true">
+          Sobre mí
+        </p>
+
+        <h2 id="presentacion-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-6">
+          Hola, soy&nbsp;Santiago Navarro
+        </h2>
+
+        <!-- Texto verbatim de §5 del brief -->
+        <div class="space-y-4 text-earth text-base leading-relaxed max-w-none">
+          <p>
+            Soy <strong class="font-semibold text-bark">{SITE.credential}</strong>. Creo que la terapia debe ser un espacio donde puedas sentirte escuchado, comprendido y acompañado sin juicios. Un lugar donde entender qué está ocurriendo, por qué está ocurriendo y, sobre todo, cómo empezar a generar cambios que te permitan recuperar tu bienestar.
+          </p>
+          <p>
+            Mi forma de trabajar se basa en una idea sencilla: cada persona es única y la terapia también debe serlo. No existen soluciones universales ni tratamientos idénticos para todos. Por ello, adapto cada proceso terapéutico a las necesidades, objetivos y circunstancias de la persona que tengo delante, construyendo una intervención completamente individualizada.
+          </p>
+        </div>
+
+        <!-- Formación (síntesis de §5) -->
+        <ul class="mt-6 space-y-2.5" aria-label="Formación de Santiago Navarro">
+          {[
+            'Máster en Psicología General Sanitaria',
+            'Máster en Terapia Clínica — Centro de Terapia de Conducta (CETECOVA)',
+            'Experto Universitario en Psicología Jurídica y Forense',
+            'Formación especializada en Psicología Deportiva',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 shrink-0 w-4.5 h-4.5 rounded-full bg-forest/15 flex items-center justify-center" aria-hidden="true">
+                <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#3F5A45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="2 6 5 9 10 3"/>
+                </svg>
+              </span>
+              <span class="text-earth text-sm leading-snug">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- CTAs -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="/sobre-la-consulta" class="btn-primary text-sm">
+            Conocer más sobre mí
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a
+            href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary text-sm"
+          >
+            Reservar primera sesión
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

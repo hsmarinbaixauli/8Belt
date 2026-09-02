@@ -1,0 +1,151 @@
+---
+import { SITE, SERVICIOS } from '../config/site';
+---
+
+<footer class="bg-bark text-cream/80 font-sans" role="contentinfo">
+  <!-- Bloque principal -->
+  <div class="container-b8 py-14 lg:py-16">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+      <!-- Col 1: Marca y contacto -->
+      <div class="lg:col-span-1">
+        <!-- Logo -->
+        <a href="/" aria-label="Beta 8 Center — inicio" class="inline-flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center shrink-0" aria-hidden="true">
+            <span class="text-white font-serif text-sm font-bold leading-none select-none">B8</span>
+          </div>
+          <div class="leading-tight">
+            <div class="font-serif font-medium text-cream text-[0.9375rem]">Beta 8 Center</div>
+            <div class="text-cream/60 text-[0.6875rem] font-medium">Psicología · Valencia</div>
+          </div>
+        </a>
+
+        <p class="text-sm text-cream/70 leading-relaxed mb-5 max-w-xs">
+          Consulta de psicología en Valencia. Terapia individual, infanto-juvenil, online, neurodivergencia y orientación familiar.
+        </p>
+
+        <!-- Contacto -->
+        <address class="not-italic space-y-2 text-sm">
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.85 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.8 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.89 7.78a16 16 0 006.29 6.29l1.14-1.14a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <a href={`tel:${SITE.phoneRaw}`} class="inline-block py-0.5 text-cream/75 hover:text-cream transition-colors">
+              {SITE.phone}
+            </a>
+          </div>
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href={`mailto:${SITE.email}`} class="inline-block py-0.5 text-cream/75 hover:text-cream transition-colors break-words">
+              {SITE.email}
+            </a>
+          </div>
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span class="text-cream/75 leading-snug">
+              {SITE.addressFull}<br />
+              <em class="text-cream/50 text-xs not-italic">{SITE.addressNote}</em>
+            </span>
+          </div>
+        </address>
+
+        <!-- RRSS — estructura preparada; activar al tener perfiles -->
+        <div class="mt-6 flex items-center gap-1" aria-label="Redes sociales">
+          <span class="text-cream/40 text-xs italic">Redes sociales próximamente</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Servicios -->
+      <div>
+        <h3 class="font-serif text-cream font-medium text-sm tracking-wide mb-4">Servicios</h3>
+        <ul class="space-y-2" role="list">
+          {SERVICIOS.map((s) => (
+            <li>
+              <a
+                href={`/servicios/${s.slug}`}
+                class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors"
+              >
+                {s.titulo}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 3: Navegación -->
+      <div>
+        <h3 class="font-serif text-cream font-medium text-sm tracking-wide mb-4">Consulta</h3>
+        <ul class="space-y-2" role="list">
+          <li><a href="/sobre-la-consulta" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Sobre la consulta</a></li>
+          <li><a href="/preguntas-frecuentes" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Preguntas frecuentes</a></li>
+          <li><a href="/contacto" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Contacto y cita</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Legal -->
+      <div>
+        <h3 class="font-serif text-cream font-medium text-sm tracking-wide mb-4">Legal</h3>
+        <ul class="space-y-2" role="list">
+          <li><a href="/aviso-legal" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Aviso legal</a></li>
+          <li><a href="/politica-de-privacidad" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de privacidad</a></li>
+          <li><a href="/politica-de-cookies" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de cookies</a></li>
+        </ul>
+
+        <!-- Acreditación colegial -->
+        <div class="mt-6 flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+          <img
+            src={SITE.colegiadoImg}
+            alt={SITE.colegiadoImgAlt}
+            width="1045"
+            height="1506"
+            loading="lazy"
+            decoding="async"
+            class="w-11 h-auto shrink-0 rounded-sm bg-white"
+          />
+          <p class="text-xs text-cream/60 leading-snug">
+            <span class="block text-cream/90 font-semibold text-[0.8125rem]">
+              Colegiado nº {SITE.colegiadoNum}
+            </span>
+            {SITE.colegio}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="border-t border-white/10">
+    <div class="container-b8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-cream/40 text-center sm:text-left">
+        &copy; {new Date().getFullYear()} {SITE.name} · {SITE.psychologist}, {SITE.credential}
+      </p>
+      <button
+        id="footer-cookie-btn"
+        type="button"
+        class="text-xs text-cream/40 hover:text-cream/70 transition-colors underline underline-offset-2"
+      >
+        Configurar cookies
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reabrir el banner de cookies desde el footer
+  document.getElementById('footer-cookie-btn')?.addEventListener('click', () => {
+    localStorage.removeItem('beta8_cookies');
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.removeAttribute('hidden');
+      banner.setAttribute('aria-hidden', 'false');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  });
+</script>

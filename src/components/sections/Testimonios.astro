@@ -1,0 +1,69 @@
+---
+// §9 del brief: "Testimonios: todavía no hay. Dejar sección preparada;
+// enlazar a reseñas de Google más adelante. No inventar reseñas."
+---
+
+<section aria-labelledby="testimonios-heading" class="bg-cream border-y border-sand/60">
+  <div class="container-b8 section-py">
+
+    <!-- Encabezado -->
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <p class="eyebrow mb-4" aria-hidden="true">
+        Experiencias
+      </p>
+      <h2 id="testimonios-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-4">
+        Lo que dicen quienes han pasado por aquí
+      </h2>
+    </div>
+
+    <!-- Tarjetas placeholder — muestran el diseño previsto, aún sin reseñas reales -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8"
+      aria-label="Reseñas (próximamente)"
+    >
+      {[1, 2, 3].map(() => (
+        <div
+          class="bg-surface border-2 border-dashed border-sand rounded-2xl p-6 flex flex-col gap-4"
+          aria-hidden="true"
+        >
+          <!-- Estrellas placeholder -->
+          <div class="flex gap-1" role="presentation">
+            {[1,2,3,4,5].map(() => (
+              <div class="w-4 h-4 rounded bg-sand/70"></div>
+            ))}
+          </div>
+          <!-- Líneas de texto placeholder -->
+          <div class="space-y-2 flex-1" role="presentation">
+            <div class="h-3 bg-sand/60 rounded-full w-full"></div>
+            <div class="h-3 bg-sand/60 rounded-full w-5/6"></div>
+            <div class="h-3 bg-sand/60 rounded-full w-4/5"></div>
+            <div class="h-3 bg-sand/60 rounded-full w-3/5"></div>
+          </div>
+          <!-- Autor placeholder -->
+          <div class="flex items-center gap-3 mt-2">
+            <div class="w-8 h-8 rounded-full bg-sand/70 shrink-0"></div>
+            <div class="h-3 bg-sand/60 rounded-full w-24"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Aviso de sección en preparación -->
+    <div class="flex flex-col items-center gap-3 text-center">
+      <div class="flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-xl">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span class="text-amber-800 text-xs font-sans font-medium">
+          [PENDIENTE: sección preparada para reseñas de Google — no se inventan testimonios]
+        </span>
+      </div>
+      <p class="text-clay text-sm font-sans">
+        Próximamente podrás leer las experiencias de quienes ya han trabajado en consulta.
+        <br/>
+        <span class="text-clay/70 text-xs">Las reseñas se enlazarán directamente desde Google Maps.</span>
+      </p>
+    </div>
+
+  </div>
+</section>

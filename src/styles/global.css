@@ -1,0 +1,338 @@
+/* Fuentes autoalojadas — sin CDN externo */
+@import "@fontsource/lora/latin-400.css";
+@import "@fontsource/lora/latin-400-italic.css";
+@import "@fontsource/lora/latin-500.css";
+@import "@fontsource/lora/latin-600.css";
+@import "@fontsource/lora/latin-700.css";
+@import "@fontsource/raleway/latin-300.css";
+@import "@fontsource/raleway/latin-400.css";
+@import "@fontsource/raleway/latin-500.css";
+@import "@fontsource/raleway/latin-600.css";
+
+@import "tailwindcss";
+
+/* ─── Tokens de diseño Beta 8 Center ─── */
+/* Paleta ivory/salvia — derivada de la referencia de estilo aprobada por el cliente.
+   Todos los pares texto/fondo verificados contra WCAG 2.1 AA (ratio anotado). */
+@theme {
+  /* Fondos */
+  --color-cream: #FAF6EF;         /* fondo de página — ivory cálido */
+  --color-surface: #FDFBF7;       /* tarjetas y secciones alternas */
+  --color-white: #FFFFFF;
+
+  /* Verdes */
+  --color-forest: #3F5A45;        /* verde principal — 7.06:1 sobre cream */
+  --color-forest-dark: #2E432F;   /* verde profundo — fondo con texto claro */
+  --color-sage: #8C9C7C;          /* salvia decorativa — SOLO fondos, nunca texto */
+  --color-sage-deep: #6E7F5E;     /* salvia legible — 4.01:1, solo texto ≥24px */
+
+  /* Texto */
+  --color-bark: #2C3A29;          /* titulares — 11.18:1 sobre cream */
+  --color-earth: #4A4A40;         /* párrafos — 8.31:1 sobre cream */
+  --color-clay: #77705F;          /* texto secundario — 4.57:1 sobre cream */
+
+  /* Cálidos */
+  --color-sand: #E7DFD1;          /* bordes y separadores */
+  --color-tan: #C6AA8C;           /* acento cálido decorativo — SOLO fondos */
+  --color-gold: #856434;          /* acento cálido legible — 5.04:1 sobre cream */
+
+  --color-danger: #B23A2B;
+
+  /* Tipografía */
+  --font-sans: 'Raleway', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+}
+
+/* ─── Base ─── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-earth);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Serif de peso medio y tracking ligeramente negativo: el titular ancho y
+     aireado de la referencia de estilo, no la serif compacta anterior. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-bark);
+    line-height: 1.22;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+
+  p {
+    max-width: 68ch;
+  }
+
+  /* La medida de 68ch deja la caja del párrafo más estrecha que su contenedor.
+     Sin márgenes automáticos se alinea a la izquierda, así que el texto
+     centrado aparece descuadrado respecto al titular — y como `ch` depende del
+     tamaño de fuente, cuanto más pequeño es el texto, más se desvía. */
+  .text-center p {
+    margin-inline: auto;
+  }
+
+  a {
+    color: var(--color-forest);
+    text-decoration-skip-ink: auto;
+  }
+
+  img, video, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Skip link para accesibilidad de teclado */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .skip-link:focus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: var(--color-forest);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 9999;
+    border-radius: 0 0 6px 0;
+    text-decoration: none;
+  }
+
+  /* Focus visible global */
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Reducción de movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─── Utilidades de proyecto ─── */
+@layer utilities {
+  /* Contenedor responsivo estándar */
+  .container-b8 {
+    width: 100%;
+    max-width: 1152px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-b8 {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-b8 {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Badge de "PENDIENTE" para placeholders visibles */
+  .badge-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FCD34D;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Botón primario */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-forest);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    padding: 0.75rem 1.625rem;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background-color 200ms ease-out, transform 150ms ease-out;
+    text-decoration: none;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    background-color: var(--color-forest-dark);
+    outline: none;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  /* Botón secundario (outline) */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: var(--color-forest);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    padding: 0.75rem 1.625rem;
+    border-radius: 9999px;
+    border: 2px solid var(--color-forest);
+    cursor: pointer;
+    transition: background-color 200ms ease-out, color 200ms ease-out, transform 150ms ease-out;
+    text-decoration: none;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    background-color: var(--color-forest);
+    color: #fff;
+    outline: none;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
+
+  /* ─── Lenguaje visual de la referencia de estilo ─── */
+
+  /* Etiqueta superior de sección: sans, versalitas, muy espaciada */
+  .eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-forest);
+  }
+
+  /* Filete corto de acento — el trazo bajo los numerales de la referencia */
+  .rule-accent {
+    display: block;
+    width: 2.75rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--color-tan);
+  }
+
+  .rule-accent-center {
+    margin-inline: auto;
+  }
+
+  /* Tarjeta suave: radio generoso, borde apenas perceptible, sin sombra dura */
+  .card-soft {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-sand);
+    border-radius: 1.25rem;
+    transition: border-color 200ms ease-out, box-shadow 200ms ease-out,
+      transform 200ms ease-out;
+  }
+
+  .card-soft-hover:hover,
+  .card-soft-hover:focus-within {
+    border-color: color-mix(in srgb, var(--color-sage) 70%, transparent);
+    box-shadow: 0 10px 30px -18px rgb(44 58 41 / 0.35);
+    transform: translateY(-2px);
+  }
+
+  /* Numeral grande de paso (01 / 02 / 03) — serif ligera en salvia */
+  .step-num {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--color-sage-deep);
+  }
+
+  /* Rótulo de paso — sans en versalitas, verde profundo */
+  .step-label {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-bark);
+  }
+
+  /* Disco de icono: círculo pleno con anillo crema, como en la referencia */
+  .icon-disc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 6px var(--color-cream);
+  }
+
+  .icon-disc-sage {
+    background-color: var(--color-sage);
+  }
+
+  .icon-disc-tan {
+    background-color: var(--color-tan);
+  }
+
+  /* Sección padding estándar */
+  .section-py {
+    padding-block: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-py {
+      padding-block: 6rem;
+    }
+  }
+}

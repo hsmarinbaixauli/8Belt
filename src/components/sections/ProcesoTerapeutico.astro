@@ -1,0 +1,121 @@
+---
+// Sección "Tu proceso terapéutico" — reproduce la referencia de estilo aprobada
+// por el cliente: numerales serif, discos de icono sobre el borde de la tarjeta,
+// conectores en tono arena y remate con rama de olivo.
+import LeafDivider from '../LeafDivider.astro';
+
+const pasos = [
+  {
+    num: '01',
+    titulo: 'Evaluación',
+    icono: 'brain',
+    tono: 'sage',
+    texto:
+      'Comenzamos comprendiendo tu situación, tu historia y aquello que te está llevando a buscar ayuda. Exploramos tus dificultades, necesidades y objetivos para obtener una visión global y establecer un plan terapéutico adaptado a ti.',
+  },
+  {
+    num: '02',
+    titulo: 'Intervención',
+    icono: 'flag',
+    tono: 'tan',
+    texto:
+      'Trabajamos sobre las dificultades identificadas mediante estrategias y técnicas psicológicas adaptadas a tus necesidades. El objetivo es desarrollar recursos, generar cambios y aplicar herramientas útiles en tu vida cotidiana.',
+  },
+  {
+    num: '03',
+    titulo: 'Seguimiento',
+    icono: 'compass',
+    tono: 'sage',
+    texto:
+      'Revisamos tu evolución, consolidamos los cambios alcanzados y ajustamos el proceso según tus necesidades. El objetivo es favorecer tu autonomía y ayudarte a mantener los recursos adquiridos a largo plazo.',
+  },
+] as const;
+
+const iconPaths: Record<string, string> = {
+  brain: `<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>`,
+  flag: `<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>`,
+  compass: `<circle cx="12" cy="12" r="9.5"/><polygon points="16.1 7.9 14.1 14.1 7.9 16.1 9.9 9.9 16.1 7.9"/>`,
+};
+---
+
+<section aria-labelledby="proceso-terapeutico-heading" class="bg-cream">
+  <div class="container-b8 section-py">
+
+    <!-- Encabezado -->
+    <div class="text-center max-w-2xl mx-auto mb-16 lg:mb-20">
+      <h2
+        id="proceso-terapeutico-heading"
+        class="font-serif text-bark text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.1] mb-6"
+      >
+        Tu proceso terapéutico
+      </h2>
+      <span class="rule-accent rule-accent-center mb-6" aria-hidden="true"></span>
+      <p class="text-earth text-base sm:text-lg leading-relaxed mx-auto">
+        Un proceso individualizado, adaptado a tus necesidades y objetivos.
+      </p>
+    </div>
+
+    <!-- Pasos -->
+    <ol
+      class="grid grid-cols-1 gap-16 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-0"
+      aria-label="Fases del proceso terapéutico"
+    >
+      {pasos.map((paso, idx) => (
+        <li class="relative flex">
+          <!-- Disco de icono, montado sobre el borde superior -->
+          <div
+            class={`icon-disc ${paso.tono === 'tan' ? 'icon-disc-tan' : 'icon-disc-sage'} absolute -top-9 left-1/2 -translate-x-1/2 z-10`}
+            aria-hidden="true"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2C3A29"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={iconPaths[paso.icono]}
+            />
+          </div>
+
+          <div class="card-soft card-soft-hover w-full pt-16 px-7 pb-8 lg:px-8">
+            <p class="step-num mb-3" aria-hidden="true">{paso.num}</p>
+            <span class="rule-accent mb-5" aria-hidden="true"></span>
+            <h3 class="step-label mb-4">
+              <span class="sr-only">Fase {paso.num}: </span>{paso.titulo}
+            </h3>
+            <p class="text-earth text-[0.9375rem] leading-[1.75] max-w-none">
+              {paso.texto}
+            </p>
+          </div>
+
+          <!-- Conector hacia la siguiente fase (solo desktop, vive en el hueco del grid) -->
+          {idx < pasos.length - 1 && (
+            <div
+              class="hidden lg:flex absolute left-full top-1/2 -translate-y-1/2 w-16 items-center justify-center"
+              aria-hidden="true"
+            >
+              <svg width="52" height="10" viewBox="0 0 52 10" fill="none">
+                <circle cx="3" cy="5" r="3" fill="#C6AA8C" />
+                <path d="M8 5h38" stroke="#C6AA8C" stroke-width="1.4" stroke-linecap="round" />
+                <path
+                  d="M43 1.5 47.5 5 43 8.5"
+                  stroke="#C6AA8C"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <!-- Remate ornamental -->
+    <LeafDivider class="mt-16 lg:mt-20" />
+
+  </div>
+</section>

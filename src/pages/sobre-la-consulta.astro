@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+import { SITE } from '../config/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.psychologist,
+  jobTitle: SITE.credential,
+  url: `${SITE.url}/sobre-la-consulta`,
+  email: SITE.email,
+  telephone: SITE.phoneRaw,
+  worksFor: {
+    '@type': 'LocalBusiness',
+    name: SITE.name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.address,
+      addressLocality: SITE.city,
+      addressCountry: 'ES',
+    },
+  },
+  knowsAbout: [
+    'Terapia Cognitivo-Conductual',
+    'Psicología Clínica',
+    'TDAH',
+    'Trastorno del Espectro Autista',
+    'Terapia familiar',
+    'Psicología infanto-juvenil',
+  ],
+};
+
+const formacion: { titulo: string; descripcion?: string }[] = [
+  {
+    titulo: 'Máster en Psicología General Sanitaria',
+  },
+  {
+    titulo: 'Máster en Terapia Clínica por el Centro de Terapia de Conducta (CETECOVA)',
+  },
+  {
+    titulo: 'Experto Universitario en Psicología Jurídica y Forense',
+  },
+  {
+    titulo: 'Formación especializada en Psicología Deportiva',
+    descripcion: 'Un ámbito que me ha permitido profundizar en aspectos como la motivación, la disciplina, la resiliencia y el rendimiento humano.',
+  },
+];
+
+---
+
+<Layout
+  title="Sobre la consulta"
+  description={`Conoce a ${SITE.psychologist}, ${SITE.credential} en Valencia. Mi enfoque, formación y forma de trabajar en Beta 8 Center.`}
+  schema={schema}
+>
+
+  <!-- ── Hero / Intro ── -->
+  <section aria-labelledby="sobre-heading" class="bg-surface">
+    <div class="container-b8 section-py">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- Foto (izquierda en desktop) -->
+        <div class="order-2 lg:order-1 flex justify-center">
+          <div class="relative w-full max-w-sm lg:max-w-none">
+            <div class="absolute top-4 left-4 w-full h-full rounded-3xl bg-sand" aria-hidden="true"></div>
+            <div
+              class="relative aspect-[4/5] w-full rounded-3xl bg-cream border border-sand flex flex-col items-center justify-center gap-4 p-8"
+              role="img"
+              aria-label="[PENDIENTE: Fotografía de Santiago Navarro Zamora]"
+            >
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#8C9C7C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
+              </svg>
+              <div class="text-center">
+                <span class="badge-pending mb-2">Imagen pendiente</span>
+                <p class="text-clay text-xs font-sans mt-1 leading-snug">Retrato profesional<br/>de Santiago Navarro Zamora</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto intro (derecha en desktop) -->
+        <div class="order-1 lg:order-2">
+          <p class="eyebrow mb-4" aria-hidden="true">
+            Sobre mí
+          </p>
+          <h1 id="sobre-heading" class="font-serif text-bark text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight mb-6">
+            Hola, soy Santiago&nbsp;Navarro
+          </h1>
+          <p class="text-clay text-sm font-sans font-medium mb-5">
+            {SITE.credential} · Colegiado nº {SITE.colegiadoNum}
+          </p>
+
+          <div class="space-y-4 text-earth text-base leading-relaxed">
+            <p>
+              Creo que la terapia debe ser un espacio donde puedas sentirte escuchado, comprendido y acompañado sin juicios. Un lugar donde entender qué está ocurriendo, por qué está ocurriendo y, sobre todo, cómo empezar a generar cambios que te permitan recuperar tu bienestar.
+            </p>
+            <p>
+              Mi forma de trabajar se basa en una idea sencilla: cada persona es única y la terapia también debe serlo. No existen soluciones universales ni tratamientos idénticos para todos. Por ello, adapto cada proceso terapéutico a las necesidades, objetivos y circunstancias de la persona que tengo delante, construyendo una intervención completamente individualizada.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+              Pedir cita
+            </a>
+            <a href="/contacto" class="btn-secondary text-sm">
+              Más formas de contacto
+            </a>
+          </div>
+
+          <!-- Acreditación colegial -->
+          <div class="mt-8 card-soft flex items-center gap-4 p-4 max-w-md">
+            <img
+              src={SITE.colegiadoImg}
+              alt={SITE.colegiadoImgAlt}
+              width="1045"
+              height="1506"
+              loading="lazy"
+              decoding="async"
+              class="w-16 h-auto shrink-0 rounded-md border border-sand bg-white"
+            />
+            <div>
+              <p class="eyebrow mb-1.5">Colegiado nº {SITE.colegiadoNum}</p>
+              <p class="text-clay text-xs leading-snug">
+                {SITE.colegio} ({SITE.colegioSiglas}). Puedes verificar la colegiación en el
+                registro oficial del colegio.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bio completa ── -->
+  <section aria-labelledby="bio-heading" class="bg-cream">
+    <div class="container-b8 section-py">
+      <div class="max-w-3xl mx-auto">
+        <h2 id="bio-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-8">
+          Mi enfoque y forma de entender la psicología
+        </h2>
+
+        <div class="space-y-5 text-earth text-base leading-relaxed">
+          <p>
+            Mi enfoque parte de la Terapia Cognitivo-Conductual, el modelo psicológico con mayor respaldo científico para el tratamiento de numerosos problemas emocionales y psicológicos. Sin embargo, entiendo la psicología como una disciplina en constante evolución. Por ello, integro técnicas procedentes de otros enfoques que creo que puedan aportar un beneficio real a la persona, buscando ofrecer una intervención flexible, rigurosa y adaptada a cada caso.
+          </p>
+          <p>
+            A lo largo de mi trayectoria profesional he acompañado a personas adultas, niños y adolescentes en el abordaje de dificultades como la ansiedad, la depresión, el trastorno obsesivo-compulsivo (TOC), las fobias, los problemas de autoestima, las dificultades de regulación emocional y los conflictos personales y familiares. Asimismo, una parte importante de mi trabajo está centrada en la evaluación e intervención con personas neurodivergentes, especialmente en perfiles de Trastorno por Déficit de Atención e Hiperactividad (TDAH), Trastorno del Espectro Autista (TEA) y altas capacidades.
+          </p>
+          <p>
+            Entiendo que ejercer como psicólogo sanitario implica una responsabilidad que va más allá de la consulta. La investigación avanza continuamente y considero imprescindible mantener una formación constante para ofrecer intervenciones actualizadas, eficaces y basadas en la mejor evidencia científica disponible.
+          </p>
+          <p>
+            Mi formación incluye el Máster en Psicología General Sanitaria, un Máster en Terapia Clínica por el Centro de Terapia de Conducta (CETECOVA), formación como Experto Universitario en Psicología Jurídica y Forense y formación especializada en Psicología Deportiva, un ámbito que me ha permitido profundizar en aspectos como la motivación, la disciplina, la resiliencia y el rendimiento humano.
+          </p>
+          <p>
+            Más allá de la formación académica, hay un principio que guía mi manera de entender la terapia: las personas pueden aprender nuevas formas de afrontar sus dificultades cuando comprenden cómo funcionan sus pensamientos, emociones y comportamientos. Mi objetivo no es ofrecer respuestas prefabricadas, sino ayudarte a comprender lo que te ocurre y dotarte de herramientas prácticas que puedas aplicar en tu vida diaria con autonomía y confianza.
+          </p>
+          <p>
+            Por ello, procuro que cada sesión combine el rigor científico con un trato cercano, claro y humano. Me gusta explicar el sentido de aquello que trabajamos en terapia, resolver las dudas que puedan surgir y construir un espacio donde te sientas cómodo para avanzar a tu propio ritmo.
+          </p>
+          <p>
+            Porque, al final, la psicología no consiste únicamente en aliviar el malestar, sino en comprenderse mejor, desarrollar recursos personales y construir una vida más coherente con aquello que realmente es importante para ti.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Formación ── -->
+  <section aria-labelledby="formacion-heading" class="bg-surface">
+    <div class="container-b8 section-py">
+      <div class="max-w-3xl mx-auto">
+        <h2 id="formacion-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-10">
+          Titulaciones y especialización
+        </h2>
+
+        <ul class="space-y-4" aria-label="Formación académica de Santiago Navarro">
+          {formacion.map((item) => (
+            <li class="flex gap-5 p-5 bg-cream rounded-2xl border border-sand hover:border-sage/40 transition-colors duration-200">
+              <div class="shrink-0 mt-0.5 w-8 h-8 rounded-full bg-forest/12 flex items-center justify-center" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="#3F5A45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="2 6 5 9 10 3"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-serif text-bark font-medium text-base leading-snug" class:list={[item.descripcion ? 'mb-1' : '']}>
+                  {item.titulo}
+                </h3>
+                {item.descripcion && (
+                  <p class="text-clay text-sm leading-relaxed mt-1">{item.descripcion}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Cómo trabajo ── -->
+  <section aria-labelledby="como-trabajo-heading" class="bg-cream">
+    <div class="container-b8 section-py">
+      <div class="max-w-3xl mx-auto">
+        <h2 id="como-trabajo-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-8">
+          Cómo trabajo
+        </h2>
+        <ul class="flex flex-wrap gap-3" role="list" aria-label="Principios de trabajo de Santiago Navarro">
+          {[
+            'Terapia Cognitivo-Conductual',
+            'Intervención individualizada',
+            'Formación constante',
+            'Trato cercano, claro y humano',
+          ].map((etiqueta) => (
+            <li
+              role="listitem"
+              class="inline-flex items-center px-4 py-2.5 bg-forest/10 border border-forest/20 rounded-full font-sans text-sm text-forest font-medium"
+            >
+              {etiqueta}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <CTAFinal />
+
+</Layout>

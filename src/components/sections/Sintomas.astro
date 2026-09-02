@@ -1,0 +1,78 @@
+---
+// § 3 del brief: "¿Te sientes identificado?"
+// El cliente aportará el listado definitivo de síntomas.
+// Los tags mostrados aquí son PLACEHOLDERS extraídos de las descripciones de servicios (§4).
+
+// [PENDIENTE: sustituir síntomas por el listado oficial del cliente]
+const sintomasPlaceholder = [
+  'Ansiedad y estrés',
+  'Estado de ánimo bajo',
+  'Baja autoestima e inseguridad',
+  'Gestión emocional difícil',
+  'Dificultades de pareja',
+  'Dependencia emocional',
+  'Duelo y pérdidas',
+  'Burnout laboral',
+  'Conflictos familiares',
+  'TDAH, TEA o altas capacidades',
+  'Miedos y fobias',
+  'Problemas de conducta',
+  'Habilidades sociales',
+  'Cambios vitales importantes',
+  'Perfeccionismo y autoexigencia',
+  'Sobrecarga emocional',
+  'Procrastinación',
+  'Aislamiento social',
+];
+---
+
+<section aria-labelledby="sintomas-heading" class="bg-sage/8 border-y border-sage/20">
+  <div class="container-b8 section-py">
+
+    <!-- Encabezado -->
+    <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
+      <p class="eyebrow mb-4" aria-hidden="true">
+        Reconócete
+      </p>
+      <h2 id="sintomas-heading" class="font-serif text-bark text-4xl sm:text-5xl font-medium leading-[1.1] mb-6">
+        ¿Te sientes identificado?
+      </h2>
+      <span class="rule-accent rule-accent-center mb-6" aria-hidden="true"></span>
+      <p class="text-earth text-base sm:text-lg leading-relaxed">
+        Si alguna de estas situaciones resuena contigo, puede que la terapia sea el espacio que necesitas para comprenderla y trabajarla.
+      </p>
+
+      <!-- Badge pendiente visible -->
+      <div class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-amber-50 border border-amber-200 rounded-xl">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span class="text-amber-800 text-xs font-sans font-medium">
+          [PENDIENTE: el cliente aportará el listado definitivo de situaciones]
+        </span>
+      </div>
+    </div>
+
+    <!-- Grid de síntomas -->
+    <div
+      class="flex flex-wrap gap-2.5 justify-center max-w-3xl mx-auto mb-10"
+      role="list"
+      aria-label="Situaciones con las que puedo ayudarte (lista de ejemplo)"
+    >
+      {sintomasPlaceholder.map((sintoma) => (
+        <span
+          role="listitem"
+          class="inline-flex items-center px-4 py-2 bg-surface border border-sand rounded-full font-sans text-sm text-earth hover:border-forest hover:text-forest hover:bg-forest/5 transition-colors duration-150 cursor-default"
+        >
+          {sintoma}
+        </span>
+      ))}
+    </div>
+
+    <!-- Nota de inclusión (verbatim de §4.1) -->
+    <p class="text-center text-clay text-sm font-sans max-w-xl mx-auto leading-relaxed">
+      Si tu situación no aparece en este listado, no significa que no pueda ayudarte. Cada persona vive sus dificultades de una manera diferente y la terapia siempre se adapta a las necesidades individuales de cada caso.
+    </p>
+
+  </div>
+</section>

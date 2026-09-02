@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config/site';
+---
+
+<Layout
+  title="Página no encontrada"
+  description="La página que buscas no existe o ha sido movida."
+  noIndex={true}
+>
+
+  <section class="bg-cream min-h-[70vh] flex items-center">
+    <div class="container-b8 py-20 text-center">
+
+      <!-- Número 404 decorativo -->
+      <p class="font-serif text-sand text-[8rem] sm:text-[12rem] font-medium leading-none select-none mb-4" aria-hidden="true">
+        404
+      </p>
+
+      <h1 class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-4">
+        Página no encontrada
+      </h1>
+      <p class="text-earth text-base leading-relaxed max-w-md mx-auto mb-10">
+        La página que buscas no existe o ha sido movida. Puedes volver al inicio o explorar los servicios disponibles.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Ir al inicio
+        </a>
+        <a href="/servicios" class="btn-secondary">
+          Ver servicios
+        </a>
+        <a
+          href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          Contactar
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Presentacion from '../components/sections/Presentacion.astro';
+import Sintomas from '../components/sections/Sintomas.astro';
+import ServiciosGrid from '../components/sections/ServiciosGrid.astro';
+import ComoTrabajo from '../components/sections/ComoTrabajo.astro';
+import ProcesoTerapeutico from '../components/sections/ProcesoTerapeutico.astro';
+import Testimonios from '../components/sections/Testimonios.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+import { SITE, SERVICIOS } from '../config/site';
+
+// Schema.org — Psychologist + LocalBusiness (NAP para Google Maps / SEO local)
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': ['Psychologist', 'LocalBusiness'],
+  name: SITE.name,
+  description: SITE.description,
+  url: SITE.url,
+  telephone: SITE.phoneRaw,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address,
+    addressLocality: SITE.city,
+    addressCountry: 'ES',
+  },
+  priceRange: `${SITE.priceSesion}€–${SITE.priceFamiliar}€`,
+  currenciesAccepted: 'EUR',
+  paymentAccepted: 'Bizum, Transferencia bancaria, Efectivo',
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    description: 'Atención con cita previa. Horario por confirmar.',
+  },
+  employee: {
+    '@type': 'Person',
+    name: SITE.psychologist,
+    jobTitle: SITE.credential,
+    email: SITE.email,
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Colegiación profesional',
+      identifier: SITE.colegiadoNum,
+      recognizedBy: {
+        '@type': 'Organization',
+        name: SITE.colegio,
+      },
+    },
+  },
+  medicalSpecialty: 'Psychology',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios psicológicos',
+    itemListElement: SERVICIOS.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Service',
+        name: s.titulo,
+        url: `${SITE.url}/servicios/${s.slug}`,
+        description: s.descripcionBreve,
+      },
+    })),
+  },
+};
+---
+
+<Layout
+  title="Psicólogo General Sanitario en Valencia"
+  description={SITE.description}
+  schema={schema}
+>
+  <!-- §1 Hero: Santiago + lema + CTA -->
+  <Hero />
+
+  <!-- §2 Presentación breve + experiencia (incluye CTA recurrente #1) -->
+  <Presentacion />
+
+  <!-- §3 "¿Te sientes identificado?" — síntomas [PENDIENTE: listado del cliente] -->
+  <Sintomas />
+
+  <!-- §4 Servicios (resumen con enlace a /servicios) + CTA recurrente #2 -->
+  <ServiciosGrid />
+
+  <!-- §5 Cómo trabajo / confianza -->
+  <ComoTrabajo />
+
+  <!-- §5b Tu proceso terapéutico: evaluación → intervención → seguimiento -->
+  <ProcesoTerapeutico />
+
+  <!-- §6 Testimonios — sección preparada, sin reseñas inventadas [PENDIENTE] -->
+  <Testimonios />
+
+  <!-- §7 CTA final limpio: lema + botón (sin precios) -->
+  <CTAFinal />
+</Layout>

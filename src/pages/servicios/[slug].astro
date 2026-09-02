@@ -1,0 +1,458 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import CTAFinal from '../../components/sections/CTAFinal.astro';
+import LeafDivider from '../../components/LeafDivider.astro';
+import { SITE, SERVICIOS } from '../../config/site';
+import { SERVICIOS_DETALLE } from '../../data/servicios-detalle';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return SERVICIOS_DETALLE.map((s) => ({
+    params: { slug: s.slug },
+    props: { detalle: s },
+  }));
+};
+
+const { detalle } = Astro.props;
+const servicioBase = SERVICIOS.find((s) => s.slug === detalle.slug);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: detalle.titulo,
+  description: detalle.metaDescription,
+  url: `${SITE.url}/servicios/${detalle.slug}`,
+  about: {
+    '@type': 'MedicalCondition',
+    name: detalle.titulo,
+  },
+  provider: {
+    '@type': 'Psychologist',
+    name: SITE.psychologist,
+    url: SITE.url,
+  },
+  offers: {
+    '@type': 'Offer',
+    price: detalle.precio,
+    priceCurrency: 'EUR',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: detalle.precio,
+      priceCurrency: 'EUR',
+      unitText: 'sesión',
+    },
+  },
+};
+
+const iconPaths: Record<string, string> = {
+  person: `<circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>`,
+  child: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  video: `<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>`,
+  brain: `<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>`,
+  family: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`,
+  home: `<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+};
+---
+
+<Layout
+  title={detalle.titulo}
+  description={detalle.metaDescription}
+  schema={schema}
+>
+
+  <!-- ── Hero del servicio ── -->
+  <section aria-labelledby="servicio-heading" class="bg-surface border-b border-sand/60">
+    <div class="container-b8 py-14 lg:py-20">
+      <!-- Breadcrumb -->
+      <nav aria-label="Ruta de navegación" class="mb-8">
+        <ol class="flex items-center gap-2 text-sm font-sans text-clay flex-wrap">
+          <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+          <li aria-hidden="true" class="text-sand">›</li>
+          <li><a href="/servicios" class="inline-block py-1 hover:text-forest transition-colors">Servicios</a></li>
+          <li aria-hidden="true" class="text-sand">›</li>
+          <li class="text-earth font-medium" aria-current="page">{detalle.titulo}</li>
+        </ol>
+      </nav>
+
+      <div class="grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start">
+        <div class="max-w-2xl">
+          <!-- Icono -->
+          {servicioBase && (
+            <div class="w-14 h-14 rounded-2xl bg-forest/10 flex items-center justify-center mb-6" aria-hidden="true">
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#3F5A45"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={iconPaths[servicioBase.icono]}
+                aria-hidden="true"
+              />
+            </div>
+          )}
+
+          <h1 id="servicio-heading" class="font-serif text-bark text-4xl sm:text-5xl font-medium leading-tight mb-4">
+            {detalle.titulo}
+          </h1>
+          <p class="font-serif text-clay text-xl italic leading-relaxed mb-6">
+            {detalle.subtitulo}
+          </p>
+        </div>
+
+        <!-- Caja de precio lateral (desktop) -->
+        <aside
+          class="hidden lg:block bg-cream border-2 border-forest/20 rounded-2xl p-6 min-w-[220px] text-center sticky top-24"
+          aria-label="Información de precio"
+        >
+          <p class="font-sans text-forest text-xs font-semibold tracking-wide mb-3">Precio por sesión</p>
+          <p class="font-serif text-bark text-4xl font-medium mb-0.5">{detalle.precio} <span class="text-2xl">€</span></p>
+          <p class="text-clay text-xs mb-5">50–60 min aproximadamente</p>
+          <a
+            href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary text-sm w-full justify-center"
+          >
+            Pedir cita
+          </a>
+          <p class="text-clay text-xs mt-3 leading-snug">Atención con cita previa<br />Presencial · Online</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Descripción completa ── -->
+  <section aria-labelledby="descripcion-heading" class="bg-cream">
+    <div class="container-b8 section-py">
+      <div class="max-w-2xl">
+        <h2 id="descripcion-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-6">
+          {detalle.slug === 'neurodivergencia' ? '¿Qué es la neurodivergencia?' : `¿En qué consiste la ${detalle.titulo.toLowerCase()}?`}
+        </h2>
+        <span class="rule-accent mb-8" aria-hidden="true"></span>
+
+        <div class="space-y-5 text-earth text-base leading-relaxed">
+          {detalle.descripcionIntro.map((parrafo) => (
+            <p>{parrafo}</p>
+          ))}
+        </div>
+
+        <!-- Perfiles destacados (chips) -->
+        {detalle.descripcionDestacados && (
+          <ul class="mt-8 flex flex-wrap gap-3" role="list">
+            {detalle.descripcionDestacados.map((item) => (
+              <li class="inline-flex items-center gap-2.5 rounded-full border border-sand bg-surface pl-4 pr-5 py-2.5">
+                <span class="w-2 h-2 rounded-full bg-tan shrink-0" aria-hidden="true"></span>
+                <span class="font-sans text-sm font-semibold uppercase tracking-[0.1em] text-bark">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {detalle.descripcionCierre && (
+          <div class="mt-8 space-y-5 text-earth text-base leading-relaxed">
+            {detalle.descripcionCierre.map((parrafo) => (
+              <p>{parrafo}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ¿En qué podemos trabajar? ── -->
+  {detalle.quePodemosTrabajar.length > 0 && (
+  <section aria-labelledby="areas-heading" class="bg-surface">
+    <div class="container-b8 section-py">
+      <div class="max-w-3xl">
+        <h2 id="areas-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-6">
+          {detalle.listaTitulo ?? '¿En qué podemos trabajar?'}
+        </h2>
+        <span class="rule-accent mb-8" aria-hidden="true"></span>
+        <div
+          class="flex flex-wrap gap-2.5"
+          role="list"
+          aria-label={`Áreas de trabajo en ${detalle.titulo}`}
+        >
+          {detalle.quePodemosTrabajar.map((area) => (
+            <span
+              role="listitem"
+              class="inline-flex items-center px-4 py-2 bg-cream border border-sand rounded-full font-sans text-sm text-earth hover:border-forest/50 hover:text-forest transition-colors duration-150"
+            >
+              {area}
+            </span>
+          ))}
+        </div>
+
+        {detalle.slug === 'terapia-individual' && (
+          <p class="mt-8 text-clay text-sm font-sans leading-relaxed p-4 bg-cream border border-sand rounded-xl">
+            Si tu situación no aparece en este listado, no significa que no pueda ayudarte. Cada persona vive sus dificultades de una manera diferente y la terapia siempre se adapta a las necesidades individuales de cada caso.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ── Perfiles atendidos (TDAH · TEA · Altas capacidades) ── -->
+  {detalle.perfiles && (
+    <section aria-labelledby="perfiles-heading" class="bg-surface">
+      <div class="container-b8 section-py">
+        <div class="max-w-3xl mb-12">
+          <p class="eyebrow mb-4">Perfiles que atendemos</p>
+          <h2 id="perfiles-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight">
+            Cada perfil, una forma distinta de funcionar
+          </h2>
+        </div>
+
+        <div class="space-y-8 lg:space-y-10">
+          {detalle.perfiles.map((perfil, idx) => (
+            <article
+              id={perfil.id}
+              class="card-soft p-7 sm:p-10 lg:p-12 scroll-mt-24"
+              aria-labelledby={`perfil-${perfil.id}`}
+            >
+              <p class="step-num mb-3" aria-hidden="true">
+                {String(idx + 1).padStart(2, '0')}
+              </p>
+              <span class="rule-accent mb-6" aria-hidden="true"></span>
+
+              <h3
+                id={`perfil-${perfil.id}`}
+                class="font-serif text-bark text-2xl sm:text-3xl font-medium leading-tight mb-3"
+              >
+                {perfil.titulo}
+              </h3>
+              <p class="font-serif italic text-clay text-lg leading-relaxed mb-7">
+                {perfil.subtitulo}
+              </p>
+
+              <div class="space-y-5 text-earth text-base leading-relaxed">
+                {perfil.parrafos.map((parrafo) => <p>{parrafo}</p>)}
+              </div>
+
+              <p class="mt-9 mb-4 font-sans text-bark text-[0.9375rem] font-semibold">
+                {perfil.introLista}
+              </p>
+              <ul class="flex flex-wrap gap-2.5" role="list">
+                {perfil.lista.map((item) => (
+                  <li class="inline-flex items-center px-4 py-2 bg-cream border border-sand rounded-full font-sans text-sm text-earth">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-9 space-y-5 text-earth text-base leading-relaxed">
+                {perfil.cierre.map((parrafo) => <p>{parrafo}</p>)}
+              </div>
+
+              {perfil.destacado && (
+                <p class="mt-8 border-l-2 border-tan pl-6 font-serif italic text-bark text-lg leading-relaxed">
+                  {perfil.destacado}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Base común: salud mental ── -->
+  {detalle.bloqueTemas && (
+    <section aria-labelledby="temas-heading" class="bg-cream">
+      <div class="container-b8 section-py">
+        <div class="max-w-2xl mb-12">
+          <h2 id="temas-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-4">
+            {detalle.bloqueTemas.titulo}
+          </h2>
+          <p class="font-serif italic text-clay text-lg leading-relaxed mb-8">
+            {detalle.bloqueTemas.subtitulo}
+          </p>
+          <span class="rule-accent mb-8" aria-hidden="true"></span>
+
+          <div class="space-y-5 text-earth text-base leading-relaxed">
+            {detalle.bloqueTemas.parrafos.map((parrafo) => <p>{parrafo}</p>)}
+          </div>
+
+          {detalle.bloqueTemas.destacado && (
+            <p class="mt-8 border-l-2 border-tan pl-6 font-serif italic text-bark text-lg leading-relaxed">
+              {detalle.bloqueTemas.destacado}
+            </p>
+          )}
+
+          <p class="mt-8 font-sans text-bark text-[0.9375rem] font-semibold">
+            {detalle.bloqueTemas.introLista}
+          </p>
+        </div>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
+          {detalle.bloqueTemas.temas.map((tema) => (
+            <li class="card-soft card-soft-hover p-6 flex flex-col">
+              <span class="rule-accent mb-4" aria-hidden="true"></span>
+              <h3 class="font-serif text-bark text-lg font-medium leading-snug mb-2.5">
+                {tema.titulo}
+              </h3>
+              <p class="text-earth text-sm leading-relaxed max-w-none">{tema.texto}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Cierre argumental ── -->
+  {detalle.bloqueCierre && (
+    <section aria-labelledby="cierre-heading" class="bg-surface">
+      <div class="container-b8 section-py">
+        <div class="max-w-2xl">
+          <h2 id="cierre-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-8">
+            {detalle.bloqueCierre.titulo}
+          </h2>
+
+          <div class="space-y-3 mb-8">
+            {detalle.bloqueCierre.aperturas.map((linea) => (
+              <p class="font-serif text-bark text-xl sm:text-[1.375rem] leading-snug">{linea}</p>
+            ))}
+          </div>
+
+          <div class="space-y-5 text-earth text-base leading-relaxed">
+            {detalle.bloqueCierre.parrafos.map((parrafo) => <p>{parrafo}</p>)}
+          </div>
+
+          <p class="mt-9 mb-5 font-sans text-bark text-[0.9375rem] font-semibold">
+            {detalle.bloqueCierre.introLista}
+          </p>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3" role="list">
+            {detalle.bloqueCierre.lista.map((item) => (
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-1 shrink-0 w-4.5 h-4.5 rounded-full bg-forest/12 flex items-center justify-center"
+                  aria-hidden="true"
+                >
+                  <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#3F5A45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="2 6 5 9 10 3"/>
+                  </svg>
+                </span>
+                <span class="text-earth text-[0.9375rem] leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <LeafDivider lines="short" class="mt-12" />
+
+          <p class="mt-8 font-serif text-bark text-xl sm:text-2xl leading-relaxed">
+            {detalle.bloqueCierre.cierre}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Cómo será el proceso ── -->
+  {detalle.comoProceso && (
+    <section aria-labelledby="proceso-heading" class="bg-cream">
+      <div class="container-b8 section-py">
+        <div class="max-w-2xl">
+          <h2 id="proceso-heading" class="font-serif text-bark text-2xl sm:text-3xl font-medium leading-tight mb-6">
+            ¿Cómo será el proceso?
+          </h2>
+          <p class="text-earth text-base leading-relaxed">
+            {detalle.comoProceso}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Frase de cierre ── -->
+  {detalle.cierre && (
+    <section aria-labelledby="frase-cierre-heading" class="bg-surface">
+      <div class="container-b8 py-16 lg:py-20">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 id="frase-cierre-heading" class="sr-only">En resumen</h2>
+          <LeafDivider lines="short" class="mb-8" />
+          <p class="font-serif text-bark text-xl sm:text-2xl leading-relaxed mx-auto">
+            {detalle.cierre}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── ¿Por qué iniciar terapia? ── -->
+  {detalle.porQueIniciar && (
+    <section aria-labelledby="por-que-heading" class="bg-surface">
+      <div class="container-b8 section-py">
+        <div class="max-w-2xl">
+          <h2 id="por-que-heading" class="font-serif text-bark text-2xl sm:text-3xl font-medium leading-tight mb-6">
+            ¿Por qué iniciar terapia?
+          </h2>
+          <p class="text-earth text-base leading-relaxed">
+            {detalle.porQueIniciar}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Precio móvil + CTA ── -->
+  <section aria-labelledby="precio-cta-heading" class="bg-surface">
+    <div class="container-b8 py-12">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 id="precio-cta-heading" class="font-serif text-bark text-2xl font-medium leading-tight mb-3">
+          ¿Quieres dar el primer paso?
+        </h2>
+        <p class="text-earth text-base leading-relaxed mb-2">
+          La primera sesión está orientada a conocernos y entender tu situación.
+        </p>
+
+        <!-- Precio -->
+        <p class="text-clay text-sm font-sans mb-7">
+          Precio: <strong class="text-bark font-semibold">{detalle.precio} €/sesión</strong> · Bizum · Transferencia · Efectivo
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Pedir cita por WhatsApp
+          </a>
+          <a href="/contacto" class="btn-secondary">
+            Ver más formas de contacto
+          </a>
+        </div>
+
+        <!-- Navegación entre servicios -->
+        <div class="mt-10 pt-8 border-t border-sand">
+          <p class="text-clay text-sm font-sans mb-4">Otros servicios disponibles</p>
+          <nav aria-label="Otros servicios">
+            <ul class="flex flex-wrap gap-2 justify-center">
+              {SERVICIOS.filter((s) => s.slug !== detalle.slug).map((s) => (
+                <li>
+                  <a
+                    href={`/servicios/${s.slug}`}
+                    class="inline-block py-1.5 text-sm font-sans text-forest hover:text-forest-dark hover:underline transition-colors"
+                  >
+                    {s.titulo}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA final ── -->
+  <CTAFinal />
+
+</Layout>

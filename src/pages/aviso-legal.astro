@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config/site';
+---
+
+<Layout
+  title="Aviso legal"
+  description={`Aviso legal de ${SITE.name}. Información sobre el titular, condiciones de uso y propiedad intelectual.`}
+  noIndex={true}
+>
+
+  <section class="bg-cream">
+    <div class="container-b8 py-14 lg:py-20">
+
+      <!-- Breadcrumb -->
+      <nav aria-label="Ruta de navegación" class="mb-8">
+        <ol class="flex items-center gap-2 text-sm font-sans text-clay flex-wrap">
+          <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+          <li aria-hidden="true" class="text-sand">›</li>
+          <li class="text-earth font-medium" aria-current="page">Aviso legal</li>
+        </ol>
+      </nav>
+
+      <!-- Aviso plantilla -->
+      <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl" role="note">
+        <p class="text-amber-800 text-sm font-sans leading-relaxed">
+          <span class="badge-pending mr-1">Plantilla</span>
+          Este texto es una plantilla. Los datos marcados como <strong>[PENDIENTE]</strong> deben ser completados con la información fiscal real del titular antes de publicar. Se recomienda revisión por un profesional legal.
+        </p>
+      </div>
+
+      <div class="max-w-3xl">
+        <h1 class="font-serif text-bark text-4xl font-medium leading-tight mb-10">Aviso legal</h1>
+
+        <div class="space-y-8 text-earth text-base leading-relaxed">
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">1. Datos del titular</h2>
+            <p>
+              En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se informa que el presente sitio web <strong>({SITE.url})</strong> es titularidad de:
+            </p>
+            <ul class="mt-3 space-y-1 text-sm">
+              <li><strong>Nombre / Razón social:</strong> <span class="badge-pending">{SITE.fiscalName}</span></li>
+              <li><strong>NIF / CIF:</strong> <span class="badge-pending">{SITE.nif}</span></li>
+              <li><strong>Domicilio fiscal:</strong> <span class="badge-pending">{SITE.fiscalAddress}</span></li>
+              <li><strong>Email de contacto:</strong> <a href={`mailto:${SITE.email}`} class="text-forest hover:underline">{SITE.email}</a></li>
+              <li><strong>Teléfono:</strong> {SITE.phone}</li>
+              <li><strong>Nº de colegiado:</strong> {SITE.colegiadoNum} — {SITE.colegio}</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">2. Objeto y ámbito de aplicación</h2>
+            <p>
+              El presente Aviso Legal regula las condiciones generales de acceso y uso del sitio web <strong>{SITE.url}</strong>, que el titular pone a disposición de los usuarios de Internet. El acceso a este sitio web implica la aceptación de las presentes condiciones.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">3. Condiciones de uso</h2>
+            <p>
+              El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que el titular ofrece a través de su sitio web, respetando la legislación vigente, las buenas costumbres y el orden público. Queda prohibido el uso del sitio web con fines ilícitos o lesivos para los derechos e intereses del titular o de terceros.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">4. Propiedad intelectual e industrial</h2>
+            <p>
+              Todos los contenidos del sitio web, entendiendo por tales textos, fotografías, gráficos, imágenes, iconos, código fuente y demás elementos, son propiedad del titular o de terceros que han autorizado su uso. Queda expresamente prohibida la reproducción, distribución o modificación de los contenidos sin autorización expresa del titular.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">5. Exclusión de responsabilidad</h2>
+            <p>
+              El titular no se hace responsable de los daños o perjuicios de cualquier naturaleza derivados del acceso o uso del sitio web, de la información contenida en el mismo o de la imposibilidad de acceder al sitio. El titular se reserva el derecho de modificar, sin previo aviso, la información contenida en su sitio web.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">6. Protección de datos personales</h2>
+            <p>
+              El tratamiento de los datos personales recogidos a través de los formularios de este sitio web se encuentra regulado en la{' '}
+              <a href="/politica-de-privacidad" class="text-forest hover:underline">Política de privacidad</a>
+              {' '}y la{' '}
+              <a href="/politica-de-cookies" class="text-forest hover:underline">Política de cookies</a>.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">7. Ley aplicable y jurisdicción</h2>
+            <p>
+              Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia derivada del uso de este sitio web, las partes se someten a los juzgados y tribunales del domicilio del titular, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="mt-10 text-clay text-sm font-sans italic">
+          Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

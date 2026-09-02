@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config/site';
+---
+
+<Layout
+  title="Política de privacidad"
+  description={`Política de privacidad de ${SITE.name}. Información sobre el tratamiento de datos personales, incluyendo datos de categoría especial (salud).`}
+  noIndex={true}
+>
+
+  <section class="bg-cream">
+    <div class="container-b8 py-14 lg:py-20">
+
+      <!-- Breadcrumb -->
+      <nav aria-label="Ruta de navegación" class="mb-8">
+        <ol class="flex items-center gap-2 text-sm font-sans text-clay flex-wrap">
+          <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+          <li aria-hidden="true" class="text-sand">›</li>
+          <li class="text-earth font-medium" aria-current="page">Política de privacidad</li>
+        </ol>
+      </nav>
+
+      <!-- Aviso plantilla -->
+      <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl" role="note">
+        <p class="text-amber-800 text-sm font-sans leading-relaxed">
+          <span class="badge-pending mr-1">Plantilla</span>
+          Este texto es una plantilla. Los datos marcados como <strong>[PENDIENTE]</strong> deben completarse con la información real antes de publicar. Los datos de salud constituyen categoría especial bajo el RGPD — se recomienda revisión por un profesional legal o DPO.
+        </p>
+      </div>
+
+      <div class="max-w-3xl">
+        <h1 class="font-serif text-bark text-4xl font-medium leading-tight mb-10">Política de privacidad</h1>
+
+        <div class="space-y-8 text-earth text-base leading-relaxed">
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">1. Responsable del tratamiento</h2>
+            <ul class="space-y-1 text-sm">
+              <li><strong>Nombre / Razón social:</strong> <span class="badge-pending">{SITE.fiscalName}</span></li>
+              <li><strong>NIF / CIF:</strong> <span class="badge-pending">{SITE.nif}</span></li>
+              <li><strong>Domicilio:</strong> <span class="badge-pending">{SITE.fiscalAddress}</span></li>
+              <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`} class="text-forest hover:underline">{SITE.email}</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">2. Finalidad del tratamiento</h2>
+            <p>Los datos personales recabados a través de los formularios de este sitio web se tratan con las siguientes finalidades:</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1 text-sm">
+              <li>Gestionar las consultas y solicitudes de información enviadas a través del formulario de contacto.</li>
+              <li>Gestionar la relación terapéutica y el seguimiento del proceso clínico, en caso de establecerse.</li>
+              <li>Cumplir con las obligaciones legales derivadas de la prestación de servicios psicológico-sanitarios.</li>
+            </ul>
+            <p class="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-900">
+              <strong>Categoría especial de datos:</strong> En el marco de la atención psicológica, pueden tratarse datos relativos a la salud del usuario. Estos datos tienen la consideración de categoría especial conforme al artículo 9 del Reglamento (UE) 2016/679 (RGPD) y se tratan bajo la base de legitimación de la prestación de servicios de atención sanitaria.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">3. Base de legitimación</h2>
+            <ul class="list-disc pl-5 space-y-1 text-sm">
+              <li><strong>Consentimiento del interesado</strong> para el tratamiento de los datos facilitados a través del formulario de contacto (art. 6.1.a RGPD).</li>
+              <li><strong>Ejecución de un contrato o prestación de servicios</strong> en el marco de la relación terapéutica (art. 6.1.b RGPD).</li>
+              <li><strong>Prestación de asistencia sanitaria</strong> para el tratamiento de datos de salud (art. 9.2.h RGPD).</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">4. Conservación de datos</h2>
+            <p>
+              Los datos personales se conservarán durante el tiempo necesario para cumplir con la finalidad para la que se recabaron y para atender las posibles responsabilidades derivadas del tratamiento. En el caso de datos relativos a la atención psicológica, se aplicará el plazo mínimo de conservación exigido por la normativa sanitaria aplicable.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">5. Destinatarios</h2>
+            <p>
+              No se cederán datos personales a terceros salvo obligación legal. Los proveedores de servicios tecnológicos (hosting, email) pueden acceder a los datos como encargados del tratamiento, bajo las garantías establecidas en el RGPD.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">6. Derechos del interesado</h2>
+            <p>El interesado puede ejercer los siguientes derechos dirigiendo un escrito a <a href={`mailto:${SITE.email}`} class="text-forest hover:underline">{SITE.email}</a>:</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1 text-sm">
+              <li><strong>Derecho de acceso:</strong> conocer qué datos se tratan.</li>
+              <li><strong>Derecho de rectificación:</strong> corregir datos inexactos.</li>
+              <li><strong>Derecho de supresión:</strong> solicitar la eliminación de los datos.</li>
+              <li><strong>Derecho de oposición:</strong> oponerse al tratamiento.</li>
+              <li><strong>Derecho a la limitación del tratamiento.</strong></li>
+              <li><strong>Derecho a la portabilidad</strong> de los datos.</li>
+            </ul>
+            <p class="mt-3 text-sm">
+              Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) en <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" class="text-forest hover:underline">www.aepd.es</a>.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-serif text-bark text-xl font-medium mb-3">7. Cookies</h2>
+            <p>
+              Este sitio web utiliza cookies propias y de terceros. Puede consultar más información en nuestra{' '}
+              <a href="/politica-de-cookies" class="text-forest hover:underline">Política de cookies</a>.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="mt-10 text-clay text-sm font-sans italic">
+          Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
