@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import CTAFinal from '../../components/sections/CTAFinal.astro';
-import { SITE, SERVICIOS } from '../../config/site';
+import { SITE, SERVICIOS, withBase } from '../../config/site';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -71,7 +71,7 @@ const iconPaths: Record<string, string> = {
         {SERVICIOS.map((servicio) => (
           <li>
             <a
-              href={`/servicios/${servicio.slug}`}
+              href={withBase(`/servicios/${servicio.slug}`)}
               class="group flex flex-col h-full bg-surface border border-sand rounded-2xl p-6 hover:border-forest/40 hover:shadow-md hover:shadow-forest/8 hover:-translate-y-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               <div class="w-12 h-12 rounded-xl bg-forest/10 flex items-center justify-center mb-4 group-hover:bg-forest/18 transition-colors duration-200 shrink-0" aria-hidden="true">

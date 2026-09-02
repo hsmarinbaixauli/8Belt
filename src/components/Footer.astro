@@ -1,5 +1,5 @@
 ---
-import { SITE, SERVICIOS } from '../config/site';
+import { SITE, SERVICIOS, withBase } from '../config/site';
 ---
 
 <footer class="bg-bark text-cream/80 font-sans" role="contentinfo">
@@ -10,7 +10,7 @@ import { SITE, SERVICIOS } from '../config/site';
       <!-- Col 1: Marca y contacto -->
       <div class="lg:col-span-1">
         <!-- Logo -->
-        <a href="/" aria-label="Beta 8 Center — inicio" class="inline-flex items-center gap-3 mb-5">
+        <a href={withBase('/')} aria-label="Beta 8 Center — inicio" class="inline-flex items-center gap-3 mb-5">
           <div class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center shrink-0" aria-hidden="true">
             <span class="text-white font-serif text-sm font-bold leading-none select-none">B8</span>
           </div>
@@ -68,7 +68,7 @@ import { SITE, SERVICIOS } from '../config/site';
           {SERVICIOS.map((s) => (
             <li>
               <a
-                href={`/servicios/${s.slug}`}
+                href={withBase(`/servicios/${s.slug}`)}
                 class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors"
               >
                 {s.titulo}
@@ -82,9 +82,9 @@ import { SITE, SERVICIOS } from '../config/site';
       <div>
         <h3 class="font-serif text-cream font-medium text-sm tracking-wide mb-4">Consulta</h3>
         <ul class="space-y-2" role="list">
-          <li><a href="/sobre-la-consulta" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Sobre la consulta</a></li>
-          <li><a href="/preguntas-frecuentes" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Preguntas frecuentes</a></li>
-          <li><a href="/contacto" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Contacto y cita</a></li>
+          <li><a href={withBase('/sobre-la-consulta')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Sobre la consulta</a></li>
+          <li><a href={withBase('/preguntas-frecuentes')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Preguntas frecuentes</a></li>
+          <li><a href={withBase('/contacto')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Contacto y cita</a></li>
         </ul>
       </div>
 
@@ -92,9 +92,9 @@ import { SITE, SERVICIOS } from '../config/site';
       <div>
         <h3 class="font-serif text-cream font-medium text-sm tracking-wide mb-4">Legal</h3>
         <ul class="space-y-2" role="list">
-          <li><a href="/aviso-legal" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Aviso legal</a></li>
-          <li><a href="/politica-de-privacidad" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de privacidad</a></li>
-          <li><a href="/politica-de-cookies" class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de cookies</a></li>
+          <li><a href={withBase('/aviso-legal')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Aviso legal</a></li>
+          <li><a href={withBase('/politica-de-privacidad')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de privacidad</a></li>
+          <li><a href={withBase('/politica-de-cookies')} class="inline-block py-1 text-sm text-cream/70 hover:text-cream transition-colors">Política de cookies</a></li>
         </ul>
 
         <!-- Acreditación colegial -->

@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import CTAFinal from '../../components/sections/CTAFinal.astro';
 import LeafDivider from '../../components/LeafDivider.astro';
-import { SITE, SERVICIOS } from '../../config/site';
+import { SITE, SERVICIOS, withBase } from '../../config/site';
 import { SERVICIOS_DETALLE } from '../../data/servicios-detalle';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -438,7 +438,7 @@ const iconPaths: Record<string, string> = {
               {SERVICIOS.filter((s) => s.slug !== detalle.slug).map((s) => (
                 <li>
                   <a
-                    href={`/servicios/${s.slug}`}
+                    href={withBase(`/servicios/${s.slug}`)}
                     class="inline-block py-1.5 text-sm font-sans text-forest hover:text-forest-dark hover:underline transition-colors"
                   >
                     {s.titulo}

@@ -1,5 +1,13 @@
 // Fuente única de datos del centro — cambiar aquí se propaga a toda la web.
 
+export const withBase = (path: string) => {
+  const base = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  const cleanPath = path.replace(/^\//, '');
+  return `${base}${cleanPath}`;
+};
+
 export const SITE = {
   name: 'Beta 8 Center',
   psychologist: 'Santiago Navarro Zamora',
@@ -7,7 +15,7 @@ export const SITE = {
   colegiadoNum: 'CV17765',
   colegio: 'Colegio Oficial de Psicólogos de la Comunitat Valenciana',
   colegioSiglas: 'COPCV',
-  colegiadoImg: '/colegiado-santiago-navarro.jpg',
+  colegiadoImg: withBase('/colegiado-santiago-navarro.jpg'),
   colegiadoImgAlt:
     'Sello del Colegio Oficial de Psicólogos de la Comunitat Valenciana acreditando a Santiago Navarro como colegiado CV17765',
   lema: 'Comprender lo que te ocurre es el primer paso para poder cambiarlo',
@@ -31,8 +39,8 @@ export const SITE = {
   mapsLink: 'https://maps.google.com/?q=C%2F+Gand%C3%ADa+10%2C+Valencia%2C+Espa%C3%B1a',
 
   // SEO / Open Graph
-  url: 'https://beta8center.es', // [PENDIENTE: dominio definitivo]
-  ogImage: '/og-image.jpg', // [PENDIENTE: imagen Open Graph definitiva]
+  url: 'https://hsmarinbaixauli.github.io/8Belt',
+  ogImage: withBase('/colegiado-santiago-navarro.jpg'),
 
   // Legal (identidad fiscal — PENDIENTE revisión profesional)
   fiscalName: '[PENDIENTE: nombre o razón social]',

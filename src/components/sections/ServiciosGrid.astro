@@ -1,5 +1,5 @@
 ---
-import { SITE, SERVICIOS } from '../../config/site';
+import { SITE, SERVICIOS, withBase } from '../../config/site';
 
 // SVG paths por icono de servicio (estilo Lucide, stroke="currentColor", stroke-width="1.5")
 const iconPaths: Record<string, string> = {
@@ -37,7 +37,7 @@ const iconPaths: Record<string, string> = {
       {SERVICIOS.map((servicio) => (
         <li>
           <a
-            href={`/servicios/${servicio.slug}`}
+            href={withBase(`/servicios/${servicio.slug}`)}
             class="group flex flex-col h-full bg-surface border border-sand rounded-2xl p-6 hover:border-forest/40 hover:shadow-md hover:shadow-forest/8 hover:-translate-y-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:outline-none"
             aria-label={`${servicio.titulo}: ${servicio.descripcionBreve}`}
           >

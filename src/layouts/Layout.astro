@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppSticky from '../components/WhatsAppSticky.astro';
 import CookieBanner from '../components/CookieBanner.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 interface Props {
   title: string;
@@ -23,8 +23,8 @@ const {
 } = Astro.props;
 
 const pageTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://beta8center.es');
-const ogImageURL = new URL(ogImage, Astro.site ?? 'https://beta8center.es');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
+const ogImageURL = new URL(ogImage, Astro.site ?? SITE.url);
 ---
 
 <!doctype html>
@@ -56,7 +56,7 @@ const ogImageURL = new URL(ogImage, Astro.site ?? 'https://beta8center.es');
     <meta name="twitter:image" content={ogImageURL.href} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 
     <!-- Schema.org JSON-LD -->
     {schema && (

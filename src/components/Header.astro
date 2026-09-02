@@ -1,11 +1,11 @@
 ---
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const navLinks = [
-  { href: '/servicios', label: 'Servicios' },
-  { href: '/sobre-la-consulta', label: 'Sobre la consulta' },
-  { href: '/preguntas-frecuentes', label: 'FAQ' },
-  { href: '/contacto', label: 'Contacto' },
+  { href: withBase('/servicios'), label: 'Servicios' },
+  { href: withBase('/sobre-la-consulta'), label: 'Sobre la consulta' },
+  { href: withBase('/preguntas-frecuentes'), label: 'FAQ' },
+  { href: withBase('/contacto'), label: 'Contacto' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-16 lg:h-20">
 
       <!-- Logo -->
-      <a href="/" aria-label={`${SITE.name} — página de inicio`} class="flex items-center gap-3 shrink-0">
+      <a href={withBase('/')} aria-label={`${SITE.name} — página de inicio`} class="flex items-center gap-3 shrink-0">
         <!-- [PENDIENTE: sustituir por logo vectorial/alta resolución cuando esté disponible] -->
         <div
           class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center shrink-0"
@@ -110,7 +110,7 @@ const currentPath = Astro.url.pathname;
 >
   <!-- Cabecera del panel mobile -->
   <div class="flex items-center justify-between h-16 px-5 border-b border-sand shrink-0">
-    <a href="/" aria-label={`${SITE.name} — inicio`} class="flex items-center gap-3">
+    <a href={withBase('/')} aria-label={`${SITE.name} — inicio`} class="flex items-center gap-3">
       <div class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center" aria-hidden="true">
         <span class="text-white font-serif text-sm font-bold leading-none select-none">B8</span>
       </div>

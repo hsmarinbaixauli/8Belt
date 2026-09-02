@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://beta8center.es', // [PENDIENTE: dominio definitivo]
+  site: 'https://hsmarinbaixauli.github.io',
+  base: '/8Belt',
   vite: {
     plugins: [tailwindcss()],
   },
