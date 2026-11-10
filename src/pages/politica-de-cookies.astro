@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 ---
 
 <Layout
@@ -15,7 +15,7 @@ import { SITE } from '../config/site';
       <!-- Breadcrumb -->
       <nav aria-label="Ruta de navegación" class="mb-8">
         <ol class="flex items-center gap-2 text-sm font-sans text-clay flex-wrap">
-          <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+          <li><a href={withBase('/')} class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
           <li aria-hidden="true" class="text-sand">›</li>
           <li class="text-earth font-medium" aria-current="page">Política de cookies</li>
         </ol>
@@ -105,7 +105,7 @@ import { SITE } from '../config/site';
             <h2 class="font-serif text-bark text-xl font-medium mb-3">5. Más información</h2>
             <p>
               Para más información sobre el tratamiento de datos personales, consulta nuestra{' '}
-              <a href="/politica-de-privacidad" class="text-forest hover:underline">Política de privacidad</a>.
+              <a href={withBase('/politica-de-privacidad')} class="text-forest hover:underline">Política de privacidad</a>.
               Para cualquier consulta sobre cookies, puedes contactar en{' '}
               <a href={`mailto:${SITE.email}`} class="text-forest hover:underline">{SITE.email}</a>.
             </p>

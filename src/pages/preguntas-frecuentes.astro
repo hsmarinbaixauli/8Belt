@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -98,7 +98,7 @@ const faqs = [
       <div class="max-w-2xl">
         <nav aria-label="Ruta de navegación" class="mb-6">
           <ol class="flex items-center gap-2 text-sm font-sans text-clay">
-            <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+            <li><a href={withBase('/')} class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
             <li aria-hidden="true" class="text-sand">›</li>
             <li class="text-earth font-medium" aria-current="page">Preguntas frecuentes</li>
           </ol>
@@ -175,7 +175,7 @@ const faqs = [
               </svg>
               Escribirme por WhatsApp
             </a>
-            <a href="/contacto" class="btn-secondary text-sm">
+            <a href={withBase('/contacto')} class="btn-secondary text-sm">
               Ver todos los contactos
             </a>
           </div>

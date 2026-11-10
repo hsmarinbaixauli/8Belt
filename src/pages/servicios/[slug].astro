@@ -66,9 +66,9 @@ const iconPaths: Record<string, string> = {
       <!-- Breadcrumb -->
       <nav aria-label="Ruta de navegación" class="mb-8">
         <ol class="flex items-center gap-2 text-sm font-sans text-clay flex-wrap">
-          <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+          <li><a href={withBase('/')} class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
           <li aria-hidden="true" class="text-sand">›</li>
-          <li><a href="/servicios" class="inline-block py-1 hover:text-forest transition-colors">Servicios</a></li>
+          <li><a href={withBase('/servicios')} class="inline-block py-1 hover:text-forest transition-colors">Servicios</a></li>
           <li aria-hidden="true" class="text-sand">›</li>
           <li class="text-earth font-medium" aria-current="page">{detalle.titulo}</li>
         </ol>
@@ -425,7 +425,7 @@ const iconPaths: Record<string, string> = {
           >
             Pedir cita por WhatsApp
           </a>
-          <a href="/contacto" class="btn-secondary">
+          <a href={withBase('/contacto')} class="btn-secondary">
             Ver más formas de contacto
           </a>
         </div>

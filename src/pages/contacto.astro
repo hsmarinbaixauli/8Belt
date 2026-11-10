@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import MapEmbed from '../components/MapEmbed.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -73,7 +73,7 @@ const iconos: Record<string, string> = {
       <div class="max-w-2xl">
         <nav aria-label="Ruta de navegación" class="mb-6">
           <ol class="flex items-center gap-2 text-sm font-sans text-clay">
-            <li><a href="/" class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
+            <li><a href={withBase('/')} class="inline-block py-1 hover:text-forest transition-colors">Inicio</a></li>
             <li aria-hidden="true" class="text-sand">›</li>
             <li class="text-earth font-medium" aria-current="page">Contacto</li>
           </ol>
@@ -87,6 +87,22 @@ const iconos: Record<string, string> = {
         <p class="text-earth text-lg leading-relaxed">
           Puedes contactarme por WhatsApp, teléfono o email. Atiendo con cita previa, tanto en consulta presencial en Valencia como de forma online.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Mapa ── -->
+  <section aria-labelledby="mapa-heading" class="bg-surface">
+    <div class="container-b8 section-py">
+      <div class="max-w-3xl mx-auto">
+        <h2 id="mapa-heading" class="font-serif text-bark text-2xl sm:text-3xl font-medium leading-tight mb-2">
+          Dónde estamos
+        </h2>
+        <p class="text-clay text-sm font-sans mb-6">
+          {SITE.addressFull}<br />
+          <em class="text-clay/80 text-xs">{SITE.addressNote}</em>
+        </p>
+        <MapEmbed />
       </div>
     </div>
   </section>
@@ -260,7 +276,7 @@ const iconos: Record<string, string> = {
                 />
                 <label for="rgpd" class="font-sans text-earth text-sm leading-relaxed">
                   He leído y acepto la{' '}
-                  <a href="/politica-de-privacidad" class="text-forest hover:text-forest-dark underline underline-offset-2">
+                  <a href={withBase('/politica-de-privacidad')} class="text-forest hover:text-forest-dark underline underline-offset-2">
                     política de privacidad
                   </a>
                   . Consiento el tratamiento de mis datos personales para gestionar mi consulta.
@@ -284,22 +300,6 @@ const iconos: Record<string, string> = {
 
           </form>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Mapa ── -->
-  <section aria-labelledby="mapa-heading" class="bg-surface">
-    <div class="container-b8 section-py">
-      <div class="max-w-3xl mx-auto">
-        <h2 id="mapa-heading" class="font-serif text-bark text-2xl sm:text-3xl font-medium leading-tight mb-2">
-          Dónde estamos
-        </h2>
-        <p class="text-clay text-sm font-sans mb-6">
-          {SITE.addressFull}<br />
-          <em class="text-clay/80 text-xs">{SITE.addressNote}</em>
-        </p>
-        <MapEmbed />
       </div>
     </div>
   </section>
