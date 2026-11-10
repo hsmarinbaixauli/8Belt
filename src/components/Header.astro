@@ -18,13 +18,13 @@ const currentPath = Astro.url.pathname;
 
       <!-- Logo -->
       <a href={withBase('/')} aria-label={`${SITE.name} — página de inicio`} class="flex items-center gap-3 shrink-0">
-        <!-- [PENDIENTE: sustituir por logo vectorial/alta resolución cuando esté disponible] -->
-        <div
-          class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center shrink-0"
-          aria-hidden="true"
-        >
-          <span class="text-white font-serif text-sm font-bold leading-none select-none">B8</span>
-        </div>
+        <img
+          src={withBase('/marca/emblema.png')}
+          alt=""
+          width="44"
+          height="44"
+          class="w-10 h-10 lg:w-11 lg:h-11 shrink-0"
+        />
         <div class="leading-tight">
           <div class="font-serif font-medium text-bark text-[0.9375rem] leading-snug">Beta 8 Center</div>
           <div class="font-sans text-clay text-[0.6875rem] font-medium">Psicología · Valencia</div>
@@ -111,9 +111,7 @@ const currentPath = Astro.url.pathname;
   <!-- Cabecera del panel mobile -->
   <div class="flex items-center justify-between h-16 px-5 border-b border-sand shrink-0">
     <a href={withBase('/')} aria-label={`${SITE.name} — inicio`} class="flex items-center gap-3">
-      <div class="w-9 h-9 bg-forest rounded-xl flex items-center justify-center" aria-hidden="true">
-        <span class="text-white font-serif text-sm font-bold leading-none select-none">B8</span>
-      </div>
+      <img src={withBase('/marca/emblema.png')} alt="" width="40" height="40" class="w-10 h-10 shrink-0" />
       <span class="font-serif font-medium text-bark text-[0.9375rem]">Beta 8 Center</span>
     </a>
     <button

@@ -20,7 +20,7 @@ export const SITE = {
     'Sello del Colegio Oficial de Psicólogos de la Comunitat Valenciana acreditando a Santiago Navarro como colegiado CV17765',
   lema: 'Comprender lo que te ocurre es el primer paso para poder cambiarlo',
   description:
-    'Consulta de psicología en Valencia. Terapia individual, infanto-juvenil, online, neurodivergencia (TDAH, TEA y altas capacidades) y orientación familiar. Pide cita con Santiago Navarro Zamora, Psicólogo General Sanitario.',
+    'Beta 8 Center, centro de psicología en Valencia. Terapia individual, infanto-juvenil, online, neurodivergencia (TDAH, TEA y altas capacidades) y orientación familiar. Atención presencial y online con cita previa.',
 
   // Contacto — variables fáciles de actualizar
   phone: '+34 679 410 618', // [temporal/personal; se actualizará con el nº definitivo del centro]
@@ -40,7 +40,9 @@ export const SITE = {
 
   // SEO / Open Graph
   url: 'https://hsmarinbaixauli.github.io/8Belt',
-  ogImage: withBase('/colegiado-santiago-navarro.jpg'),
+  ogImage: withBase('/og-beta8.jpg'),
+  logo: withBase('/marca/logo-beta8.png'),
+  photo: withBase('/fotos/santiago-navarro-retrato-900.webp'),
 
   // Legal (identidad fiscal — PENDIENTE revisión profesional)
   fiscalName: '[PENDIENTE: nombre o razón social]',

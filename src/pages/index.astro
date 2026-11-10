@@ -17,6 +17,8 @@ const schema = {
   name: SITE.name,
   description: SITE.description,
   url: SITE.url,
+  logo: new URL(SITE.logo, SITE.url).href,
+  image: new URL(SITE.photo, SITE.url).href,
   telephone: SITE.phoneRaw,
   email: SITE.email,
   address: {
@@ -66,21 +68,21 @@ const schema = {
 ---
 
 <Layout
-  title="Psicólogo General Sanitario en Valencia"
+  title="Centro de psicología en Valencia"
   description={SITE.description}
   schema={schema}
 >
-  <!-- §1 Hero: Santiago + lema + CTA -->
+  <!-- §1 Hero: el centro (Beta 8 Center) + frase de comienzo + CTA -->
   <Hero />
 
-  <!-- §2 Presentación breve + experiencia (incluye CTA recurrente #1) -->
-  <Presentacion />
-
-  <!-- §3 "¿Te sientes identificado?" — síntomas [PENDIENTE: listado del cliente] -->
+  <!-- §2 "¿Te sientes identificado?" — síntomas [PENDIENTE: listado del cliente] -->
   <Sintomas />
 
-  <!-- §4 Servicios (resumen con enlace a /servicios) + CTA recurrente #2 -->
+  <!-- §3 Servicios del centro (resumen con enlace a /servicios) -->
   <ServiciosGrid />
+
+  <!-- §4 Quién te atiende: Santiago Navarro (en segundo plano respecto al centro) -->
+  <Presentacion />
 
   <!-- §5 Cómo trabajo / confianza -->
   <ComoTrabajo />

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -9,6 +9,7 @@ const schema = {
   name: SITE.psychologist,
   jobTitle: SITE.credential,
   url: `${SITE.url}/sobre-la-consulta`,
+  image: new URL(SITE.photo, SITE.url).href,
   email: SITE.email,
   telephone: SITE.phoneRaw,
   worksFor: {
@@ -64,19 +65,17 @@ const formacion: { titulo: string; descripcion?: string }[] = [
         <div class="order-2 lg:order-1 flex justify-center">
           <div class="relative w-full max-w-sm lg:max-w-none">
             <div class="absolute top-4 left-4 w-full h-full rounded-3xl bg-sand" aria-hidden="true"></div>
-            <div
-              class="relative aspect-[4/5] w-full rounded-3xl bg-cream border border-sand flex flex-col items-center justify-center gap-4 p-8"
-              role="img"
-              aria-label="[PENDIENTE: Fotografía de Santiago Navarro Zamora]"
-            >
-              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#8C9C7C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
-              </svg>
-              <div class="text-center">
-                <span class="badge-pending mb-2">Imagen pendiente</span>
-                <p class="text-clay text-xs font-sans mt-1 leading-snug">Retrato profesional<br/>de Santiago Navarro Zamora</p>
-              </div>
-            </div>
+            <img
+              src={withBase('/fotos/santiago-navarro-retrato-900.webp')}
+              srcset={`${withBase('/fotos/santiago-navarro-retrato-600.webp')} 600w, ${withBase('/fotos/santiago-navarro-retrato-900.webp')} 900w`}
+              sizes="(min-width: 1024px) 45vw, 384px"
+              alt={`Retrato de ${SITE.psychologist}, ${SITE.credential}`}
+              width="900"
+              height="1200"
+              fetchpriority="high"
+              decoding="async"
+              class="relative aspect-[4/5] w-full rounded-3xl object-cover object-[50%_30%]"
+            />
           </div>
         </div>
 
@@ -105,7 +104,7 @@ const formacion: { titulo: string; descripcion?: string }[] = [
             <a href={`https://wa.me/${SITE.phoneRaw}?text=${SITE.whatsappMsg}`} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
               Pedir cita
             </a>
-            <a href="/contacto" class="btn-secondary text-sm">
+            <a href={withBase('/contacto')} class="btn-secondary text-sm">
               Más formas de contacto
             </a>
           </div>

@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../../config/site';
+import { SITE, withBase } from '../../config/site';
 ---
 
 <section aria-labelledby="presentacion-heading" class="bg-surface">
@@ -11,21 +11,17 @@ import { SITE } from '../../config/site';
         <div class="relative w-full max-w-sm lg:max-w-none">
           <!-- Sombra decorativa desplazada -->
           <div class="absolute top-4 left-4 w-full h-full rounded-3xl bg-sand" aria-hidden="true"></div>
-          <!-- Placeholder foto 2 -->
-          <!-- [PENDIENTE: sustituir por img real con src="/fotos/santiago-navarro-2.jpg" alt="Santiago Navarro Zamora en consulta"] -->
-          <div
-            class="relative aspect-[4/5] w-full rounded-3xl bg-cream border border-sand flex flex-col items-center justify-center gap-4 p-8"
-            role="img"
-            aria-label="[PENDIENTE: Fotografía de Santiago Navarro Zamora]"
-          >
-            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#8C9C7C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-            </svg>
-            <div class="text-center">
-              <span class="badge-pending mb-2">Imagen pendiente</span>
-              <p class="text-clay text-xs font-sans mt-1 leading-snug">Segunda fotografía de Santiago<br/>(consulta / entorno profesional)</p>
-            </div>
-          </div>
+          <img
+            src={withBase('/fotos/santiago-navarro-consulta-900.webp')}
+            srcset={`${withBase('/fotos/santiago-navarro-consulta-600.webp')} 600w, ${withBase('/fotos/santiago-navarro-consulta-900.webp')} 900w`}
+            sizes="(min-width: 1024px) 45vw, 384px"
+            alt={`${SITE.psychologist} trabajando en su consulta`}
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+            class="relative aspect-[4/5] w-full rounded-3xl object-cover object-[50%_60%]"
+          />
         </div>
       </div>
 
@@ -33,7 +29,7 @@ import { SITE } from '../../config/site';
       <div class="order-1 lg:order-2">
         <!-- Etiqueta de sección -->
         <p class="eyebrow mb-4" aria-hidden="true">
-          Sobre mí
+          Quién te atiende
         </p>
 
         <h2 id="presentacion-heading" class="font-serif text-bark text-3xl sm:text-4xl font-medium leading-tight mb-6">
@@ -71,7 +67,7 @@ import { SITE } from '../../config/site';
 
         <!-- CTAs -->
         <div class="mt-8 flex flex-col sm:flex-row gap-3">
-          <a href="/sobre-la-consulta" class="btn-primary text-sm">
+          <a href={withBase('/sobre-la-consulta')} class="btn-primary text-sm">
             Conocer más sobre mí
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
