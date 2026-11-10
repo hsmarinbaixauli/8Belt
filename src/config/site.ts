@@ -41,7 +41,7 @@ export const SITE = {
   // SEO / Open Graph
   url: 'https://hsmarinbaixauli.github.io/8Belt',
   ogImage: withBase('/og-beta8.jpg'),
-  logo: withBase('/marca/logo-beta8.png'),
+  logo: withBase('/marca/logo-beta8-principal.png'),
   photo: withBase('/fotos/santiago-navarro-retrato-900.webp'),
 
   // Legal (identidad fiscal — PENDIENTE revisión profesional)
